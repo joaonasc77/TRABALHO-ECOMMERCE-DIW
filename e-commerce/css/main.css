@@ -1,0 +1,138 @@
+body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    min-height: 100vh;
+}
+
+header {
+    grid-area: header;
+    background-color: #FFD60A;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(940px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+footer {
+    grid-area: footer;
+    background-color: white;
+    padding: 20px;
+}
+
+main>section:first-of-type {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-height: 80vh;
+}
+
+#card-container {
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
+    padding: 0px 20px 10px 0px;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    overflow: auto;
+}
+
+aside {
+    width: 30%;
+    float: right;
+}
+
+@media (max-width: 934px) {
+
+    aside {
+        width: 100%;
+        float: none;
+    }
+
+    #card-container {
+        width: 100%;
+    }
+}
+
+div.aside:first-of-type {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.aside {
+    background-color: rgb(236, 236, 236);
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid rgb(77, 77, 77);
+}
+
+#aside-card {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+#aside-card>img {
+    width: 30%;
+    object-fit: cover;
+}
+
+
+hr {
+    width: 90%;
+    background-color: black;
+}
+
+.card {
+    border: 1px solid rgb(77, 77, 77);
+    border-radius: 0%;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    width: 30%;
+    min-width: 10rem;
+    margin: 10px;
+}
+
+.card>img {
+    margin: auto;
+    margin-top: 4px;
+    width: 95%;
+    object-fit: cover;
+}
+
+@media screen and (min-width:240px) and (max-width:500px) {
+    body {
+        background-color: green;
+    }
+}
+
+@media screen and (min-width:501px) and (max-width:1000px) {
+    body {
+        background-color: red;
+    }
+}
+
+@media screen and (min-width:1001px) and (max-width:1400px) {
+    body {
+        background-color: black;
+    }
+}

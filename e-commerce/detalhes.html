@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"
+        defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"
+        defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"
+        defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Detalhes - DivinoAcessorio</title>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md sticky-top navbar-light" style="background-color:#FFD60A"
+        justify-content-between>
+        <img src="guitar.png" alt="logo" id="logo" class="navbar-brand" width="60" height="60">
+        <span><strong>DivinoAcessorio</strong> <br> O melhor site para encontrar seus acessórios!</span>
+        <button class="navbar-toggler btn btn-light my-2 my-sm-0" type="button" data-toggle="collapse"
+            data-target="#navegacao" aria-controls="navegacao" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navegacao">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href=""><strong>Aluno: João Lucas Divino Alves Silva Nascimento</strong></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=""><strong>Curso:Ciência da Computação</strong></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=""><strong>Matrícula: 811775</strong></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Entrar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Cadastrar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Minha Conta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Meus Pedidos</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0 m-2">
+                <input name="query" class="form-control mr-sm-2" id="search" type="search" placeholder="Search"
+                    aria-label="Search">
+                <button class="btn btn-dark my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
+            </form>
+        </div>
+    </nav>
+    <main>
+
+    </main>
+
+    <script>
+        var url = new URL(window.location.href);
+        var idProduto = url.searchParams.get("id");
+        console.log(idProduto);
+
+        fetch("https://diwserver.vps.webdock.cloud/products/" + idProduto)
+            .then(response => response.json())
+            .then(dados => {
+                mostrarDetalhesDoProduto(dados);
+            });
+
+        function mostrarDetalhesDoProduto(produto) {
+            const main = document.querySelector('main');
+
+            var container = document.createElement("div");
+            container.innerHTML = `
+        <div class="row align-items-center bg-light py-3 px-xl-5">
+            <div class="col-lg-5 mb-30">
+                <div class="h-100 bg-light p-30">
+                    <img class="img-fluid mx-auto d-block" src="${produto.image}">
+                </div>
+            </div>
+            <div class="col-lg-7 mb-30">
+                <h3 class="h3 text-truncate">${produto.title}</h3>
+                <h4 class="h4 text-truncate">R$ ${produto.price}</h4>
+        <h3 class="h3 text-truncate">Avaliacao: ${produto.rating['rate']}</h3>
+        <h3 class="h3 text-truncate">Quantidade de avaliações: ${produto.rating['count']}</h3>
+        <h3 class="h3 text-truncate">Marca: ${produto.brandName}</h3>
+    <button class="btn btn-warning">Comprar</button>
+            </div>
+            <div class="col-lg-7 h-auto mb-30">
+                <h5 class="h5 text-truncate">Descrição</h5>
+            <p class="text-muted">${produto.description}</p>
+            </div>
+        </div>`;
+            main.appendChild(container);
+        }
+    </script>
+</body>
+
+</html>
